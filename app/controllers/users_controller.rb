@@ -5,12 +5,11 @@ class UsersController < ApplicationController
     @users = User.order(id: :desc).page(params[:page]).per(25)
   end
 
+  
   def show
-    def show
-      @user = User.find(params[:id])
-      @microposts = @user.microposts.order(id: :desc).page(params[:page])
-      counts(@user)
-    end
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order(id: :desc).page(params[:page])
+    counts(@user)
   end
 
   def new
@@ -38,6 +37,12 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
     @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
+  
+  def likes
+    @user = User.find(params[:id])
+    @favorites = @user.likes.page(params[:page])
     counts(@user)
   end
 
